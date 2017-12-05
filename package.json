@@ -1,7 +1,6 @@
 {
   "name": "be-novative",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --colors --progress",
@@ -31,5 +30,6 @@
     "react-dom": "16.2.0",
     "react-router": "4.2.0",
     "react-router-dom": "4.2.2"
-  }
+  },
+  "description": ""
 }

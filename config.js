@@ -6,6 +6,7 @@ module.exports = {
         publicPath: 'public'
     },
     api: {
+        host: 'localhost',
         port: 3001
     }
 };
