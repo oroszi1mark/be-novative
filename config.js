@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     app: {
         port: 3000,
@@ -7,6 +9,7 @@ module.exports = {
     },
     api: {
         host: 'localhost',
-        port: 3001
+        port: 3001,
+        apiPath: 'benovative'
     }
 };
