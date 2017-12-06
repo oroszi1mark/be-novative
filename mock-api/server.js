@@ -19,6 +19,8 @@ server.events.on('response', function serverLog(request) {
 server.route(require('./api/employee/routes/get_employees'));
 server.route(require('./api/employee/routes/get_employee'));
 server.route(require('./api/employee/routes/delete_employee'));
+server.route(require('./api/employee/routes/post_employee'));
+server.route(require('./api/employee/routes/put_employee'));
 
 async function startServer(server) {
     try {
