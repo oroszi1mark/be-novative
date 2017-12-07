@@ -25,13 +25,23 @@ module.exports = {
         })
     ],
     resolve: {
-        extensions: ['.js', '.jsx']
+        alias: {
+            components: path.join(__dirname, 'app/components/'),
+            services: path.join(__dirname, 'app/services/')
+        },
+        extensions: ['.js', '.jsx', '.svc.js']
     },
     devtool: 'cheap-eval-source-map',
     devServer: {
         contentBase: path.join(__dirname, config.app.distPath),
         historyApiFallback: true,
         inline: true,
-        port: config.app.port
+        port: config.app.port,
+        proxy: [{
+            //context: '/benovative/**',
+            //target: 'http://localhost:3001'
+            context: `/${config.api.basePath}/**`,
+            target: `${config.api.protocol}://${config.api.host}:${config.api.port}`
+        }]
     }
 };

@@ -2,4 +2,4 @@
 
 const apiConfig = require('../../../config').api;
 
-module.exports = `/${apiConfig.apiPath}/employee`;
+module.exports = `/${apiConfig.basePath}/employee`;

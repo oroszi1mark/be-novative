@@ -11,6 +11,7 @@ function Database(db = []) {
 
     function createEmployee(formData) {
         const id = getNextId();
+        console.log(formData);
         const newEmployee = { ...formData, id };
 
         db = db.concat([newEmployee]);

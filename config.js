@@ -8,8 +8,9 @@ module.exports = {
         publicPath: 'public'
     },
     api: {
+        protocol: 'http',
         host: 'localhost',
         port: 3001,
-        apiPath: 'benovative'
+        basePath: 'benovative'
     }
 };
