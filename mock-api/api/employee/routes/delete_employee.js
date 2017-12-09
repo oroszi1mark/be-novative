@@ -7,14 +7,14 @@ const paramsValidator = require('../validation/delete_employee');
 
 module.exports = {
     method: 'DELETE',
-    path: `${endpoint}/{id}`,
+    path: `${endpoint}/{slug}`,
     config: {
         handler: function deleteEmployeeHandler(request) {
-            const { id } = request.params;
+            const { slug } = request.params;
 
             try {
-                db.removeEmployee(id);
-                return `Employee with id ${id} deleted`;
+                db.removeEmployee(slug);
+                return `Employee with slug ${slug} deleted`;
             } catch (err) {
                 return Boom.notFound(err);
             }

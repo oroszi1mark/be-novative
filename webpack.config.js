@@ -5,10 +5,23 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = require('./config');
 
 module.exports = {
-    entry: ['babel-polyfill', path.join(__dirname, config.app.srcPath, 'app.jsx')],
+    entry: {
+        app: ['babel-polyfill', path.join(__dirname, config.app.srcPath, 'app.jsx')],
+        vendor: [
+            'react',
+            'react-dom',
+            'react-router-dom',
+            'prop-types',
+            'react-router-prop-types',
+            'aphrodite',
+            'axios',
+            'lodash'
+        ]
+    },
     output: {
-        filename: 'bundle-[hash].js',
-        path: path.join(__dirname, config.app.distPath)
+        filename: '[name].js',
+        path: path.join(__dirname, config.app.distPath),
+        publicPath: '/'
     },
     module: {
         loaders: [
@@ -38,8 +51,6 @@ module.exports = {
         inline: true,
         port: config.app.port,
         proxy: [{
-            //context: '/benovative/**',
-            //target: 'http://localhost:3001'
             context: `/${config.api.basePath}/**`,
             target: `${config.api.protocol}://${config.api.host}:${config.api.port}`
         }]

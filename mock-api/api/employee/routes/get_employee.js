@@ -7,14 +7,14 @@ const paramsValidator = require('../validation/get_employee');
 
 module.exports = {
     method: 'GET',
-    path: `${endpoint}/{id}`,
+    path: `${endpoint}/{slug}`,
     config: {
         handler: function getEmployeeHandler(request) {
-            const { id } = request.params;
-            const employee = db.getEmployeeById(id);
+            const { slug } = request.params;
+            const employee = db.getEmployeeBySlug(slug);
 
             if (!employee) {
-                return Boom.notFound(`Employee with id ${id} not found`);
+                return Boom.notFound(`Employee with slug ${slug} not found`);
             }
 
             return employee;

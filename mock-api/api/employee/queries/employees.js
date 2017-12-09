@@ -11,16 +11,21 @@ function verifyUniqueEmployee(request, h) {
 }
 
 function verifyEmployeeExists(request, h) {
-    const { id } = request.payload;
-    const employee = db.getEmployeeById(id);
+    const { slug } = request.payload;
+    const employee = db.getEmployeeBySlug(slug);
 
-    return employee ? h.response() : Boom.notFound(`Employee with id ${id} does not exist`);
+    return employee ? h.response() : Boom.notFound(`Employee with slug ${slug} does not exist`);
 }
 
 function generateSlug(request) {
     const { firstName, lastName } = request.payload;
+    const newSlug = `${firstName.toLowerCase()}-${lastName.toLowerCase()}`;
+    const numOfSimilarSlugs = db.getEmployees()
+        .filter(emp => emp.firstName === firstName && emp.lastName === lastName)
+        .length;
+    const ix = numOfSimilarSlugs && numOfSimilarSlugs + 1;
 
-    return `${firstName.toLowerCase()}-${lastName.toLowerCase()}`;
+    return ix ? `${newSlug}-${ix}` : newSlug;
 }
 
 module.exports = {

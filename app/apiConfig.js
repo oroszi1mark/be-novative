@@ -1,15 +1,14 @@
 import config from '../config';
 
 export default Object.freeze({
-    //APIPrefix: config.api.basePath,
-    APIPrefix: 'benovative',
+    APIPrefix: config.api.basePath,
     endpoints: {
         getEmployees: {
             path: 'employee',
             method: 'GET'
         },
         getEmployee: {
-            path: 'employee/:id',
+            path: 'employee/:slug',
             method: 'GET'
         },
         postEmployee: {
@@ -21,7 +20,7 @@ export default Object.freeze({
             method: 'PUT'
         },
         deleteEmployee: {
-            path: 'employee/:id',
+            path: 'employee/:slug',
             method: 'DELETE'
         }
     }

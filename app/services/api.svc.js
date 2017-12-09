@@ -4,8 +4,9 @@ import axios from 'axios';
 import config from '../apiConfig';
 
 async function launchRequest(params = { endpointName: '', pathParams: {} }, payload = {}) {
-    const apiUrl = generateEndpointURL(params.endpointName, params.pathParams);
-    const method = getEndpointMethod(params.endpointName);
+    const { endpointName, pathParams } = params;
+    const apiUrl = generateEndpointURL(endpointName, pathParams);
+    const method = getEndpointMethod(endpointName);
 
     try {
         const result = await callAxiosMethod(method)(apiUrl)(payload);
@@ -16,7 +17,7 @@ async function launchRequest(params = { endpointName: '', pathParams: {} }, payl
 
         throw result;
     } catch (err) {
-        console.error(err);
+        throw err;
     }
 }
 

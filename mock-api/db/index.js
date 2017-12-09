@@ -3,20 +3,12 @@
 const employees = require('../data/employees');
 
 function Database(db = []) {
-    function getNextId() {
-        return db.reduce(function findHighestId(acc, cur) {
-            return cur.id > acc ? cur.id : acc;
-        }, 0) + 1;
-    }
-
     function createEmployee(formData) {
-        const id = getNextId();
-        console.log(formData);
-        const newEmployee = { ...formData, id };
+        const { slug } = formData;
 
-        db = db.concat([newEmployee]);
+        db = db.concat([formData]);
 
-        const success = getEmployeeById(id);
+        const success = getEmployeeBySlug(slug);
 
         if (success) {
             return success;
@@ -29,8 +21,8 @@ function Database(db = []) {
         return db;
     }
 
-    function getEmployeeById(id) {
-        return db.find(employee => employee.id === Number(id));
+    function getEmployeeBySlug(slug) {
+        return db.find(employee => employee.slug === slug);
     }
 
     function getEmployeeByEmail(email) {
@@ -43,12 +35,12 @@ function Database(db = []) {
 
     function updateEmployee(employee) {
         const newDb = db.slice();
-        const ix = newDb.findIndex(emp => emp.id === employee.id);
+        const ix = newDb.findIndex(emp => emp.slug === employee.slug);
 
         newDb.splice(ix, 1, employee);
         db = newDb;
 
-        const updatedEmployee = getEmployeeById(employee.id);
+        const updatedEmployee = getEmployeeById(employee.slug);
         const success = updatedEmployee === employee;
 
         if (success) {
@@ -58,12 +50,12 @@ function Database(db = []) {
         }
     }
 
-    function removeEmployee(id) {
+    function removeEmployee(slug) {
         const newDb = db.slice();
-        const ix = newDb.findIndex(emp => emp.id === Number(id));
+        const ix = newDb.findIndex(emp => emp.slug === slug);
 
-        if (isNaN(ix)) {
-            throw `Employee with id ${id} does not exist`;
+        if (ix < 0) {
+            throw `Employee with slug ${slug} does not exist`;
         }
 
         newDb.splice(ix, 1);
@@ -73,7 +65,7 @@ function Database(db = []) {
     return {
         createEmployee,
         getEmployees,
-        getEmployeeById,
+        getEmployeeBySlug,
         getEmployeeByEmail,
         addEmployee,
         updateEmployee,
