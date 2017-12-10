@@ -17,7 +17,7 @@ async function launchRequest(params = { endpointName: '', pathParams: {} }, payl
 
         throw result;
     } catch (err) {
-        throw err;
+        throw err.message;
     }
 }
 
